@@ -1,0 +1,23 @@
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.container {
+  width: 622px;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #d36746;
+  border: 5px solid #d36746;
+  border-radius: 10px;
+}
+
+.box {
+  border-radius: 5px;
+  background-color: rgba(4, 255, 25, 0.35);
+}
