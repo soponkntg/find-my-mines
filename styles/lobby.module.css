@@ -1,0 +1,43 @@
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.button {
+  box-sizing: border-box;
+  width: 15em;
+  height: 3em;
+  font-size: 20px;
+  border-radius: 0.5em;
+  margin: 0.5em;
+  box-shadow: 0 0 1em rgba(0, 0, 0, 0.2);
+  color: white;
+  text-transform: capitalize;
+  line-height: 3em;
+  transition: 0.3s;
+  cursor: pointer;
+  display: block;
+  background: linear-gradient(to right, orange, tomato);
+  text-align: left;
+  padding-left: 10%;
+  transform: perspective(500px) rotateY(45deg);
+}
+
+.button:hover {
+  transform: perspective(200px) rotateY(45deg);
+  padding-left: 5%;
+}
+
+.create_room {
+  position: relative;
+  margin-right: auto;
+  margin-left: auto;
+  width: 227px;
+  height: 60px;
+  top: 100px;
+
+  background: #968dff;
+  border-radius: 14px;
+}

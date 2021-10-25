@@ -1,0 +1,8 @@
+.bomb {
+  width: 100px;
+  height: 100px;
+  margin: 1px;
+  border-radius: 5px;
+  background-color: rgba(4, 255, 25, 0.35);
+  font-size: 50px;
+}
