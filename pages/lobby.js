@@ -2,14 +2,13 @@ import React, { useState } from "react";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 import Link from "next/link";
-import Background from "../public/bg.jpeg";
 import { Room } from "../components/Room";
 import styles from "../styles/lobby.module.css";
 export default function lobby() {
   const [form, setForm] = useState({ username: "", room_name: "", mode: "" });
-  const subbmitRoom = (event) => {
+  const submitRoom = (event) => {
     event.preventDefault();
-    alert(`So your name is ${event.target.username.value}`);
+    // alert(`So your name is ${event.target.username.value}`);
   };
   const test = (event) => {
     // setForm({...form, event.target.name : event.target.value})
@@ -19,10 +18,13 @@ export default function lobby() {
   return (
     <div id="body">
       <body
-      // style={{
-      //   backgroundImage: `url("https://www.google.com/imgres?imgurl=https%3A%2F%2Fimage.shutterstock.com%2Fimage-vector%2Fcartoon-game-background-260nw-303257369.jpg&imgrefurl=https%3A%2F%2Fwww.shutterstock.com%2Fsearch%2Fcartoon%2Bgame%2Bbackgrounds&tbnid=SJskKHXgXSdFdM&vet=12ahUKEwixjPKyu-TzAhX4_TgGHUejAMoQMygDegUIARDdAQ..i&docid=6qBgGPWzkd7v1M&w=433&h=280&q=background%20for%20game&ved=2ahUKEwixjPKyu-TzAhX4_TgGHUejAMoQMygDegUIARDdAQ")`,
-      // }}
+        style={{
+          backgroundImage: `url("https://p1.pxfuel.com/preview/388/463/722/skydiving-jump-falling-parachuting.jpg")`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover"
+        }}
       ></body>
+
       <div style={{ textAlign: "center" }}>
         <img
           src="logo.png"
@@ -32,22 +34,20 @@ export default function lobby() {
 
       <div
         style={{
-          width: "1440px",
+          width: "100%",
           height: "40px",
           left: "0px",
           top: "0px",
-
           background: "#FF8D8D",
+
         }}
       >
         <h1
           style={{
             position: "absolute",
-            width: "99px",
             height: "42px",
             left: "136px",
             top: "240px",
-
             color: "#000000",
           }}
         >
@@ -76,7 +76,7 @@ export default function lobby() {
           position="right center"
         >
           <div>
-            <form onSubmit={subbmitRoom}>
+            <form onSubmit={submitRoom}>
               <span>Username</span>
               <input
                 type="text"
@@ -110,27 +110,22 @@ export default function lobby() {
                 <option value="12x12">12x12</option>
               </select>
               <br></br>
-              <Link href="/game-play">
-                <input type="submit" value="Done"></input>
-              </Link>
+              <a href="game-play">
+                Done
+              </a>
             </form>
           </div>
         </Popup>
       </div>
-      <div id="frame-center">
+      <div id="frame-center" style={{}}>
         <div
           id="frame-for-room"
           style={{
-            position: "absolute",
-            width: "1296px",
-            height: "550px",
-            left: "72px",
-            top: "434px",
-            border: "7px solid #000000",
-            boxSizing: "border-box",
+            alignItems: 'center'
           }}
+          className={styles.frame_room}
         >
-          <Room name="test"></Room>
+          <Room name="test" ></Room>
         </div>
       </div>
     </div>
