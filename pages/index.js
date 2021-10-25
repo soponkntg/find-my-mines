@@ -16,6 +16,7 @@ export default function Home() {
   useEffect(() => {
     const socket = io("/find-my-mines");
     context.setSocket(socket);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const toHTW = () => {
