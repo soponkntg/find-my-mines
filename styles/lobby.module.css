@@ -1,42 +1,93 @@
 .frame_room {
-    position: absolute;
-    width: 1296px;
-    height: 550px;
-    top: 434px;
-    border: 7px solid #000000;
-    box-sizing: border-box;
-    display: flex;
+  position: absolute;
+  width: 1296px;
+  height: 550px;
+  left: 72px;
+  top: 500px;
+
+  border: 7px solid #000000;
+  box-sizing: border-box;
 }
 
 .center {
-    display: block;
-    justify-content: center;
-    align-items: center;
-    flex-direction: center;
-  }
-
-.button {
-    box-sizing: border-box;
-    width: 15em;
-    height: 3em;
-    font-size: 20px;
-    border-radius: 0.5em;
-    margin: 0.5em;
-    box-shadow: 0 0 1em rgba(0,0,0,0.2);
-    color: white;
-    font-family: sans-serif;
-    text-transform: capitalize;
-    line-height: 3em;
-    transition: 0.3s;
-    cursor: pointer;
-    display: block;
-    background: linear-gradient(to right, orange, tomato);
-    text-align: left;
-    padding-left: 10%;
-    transform: perspective(500px) rotateY(45deg);
+  display: block;
+  justify-content: center;
+  align-items: center;
+  flex-direction: center;
 }
 
-.button:hover{
-    transform: perspective(200px) rotateY(45deg);
-    padding-left: 5%;
+.button {
+  box-sizing: border-box;
+  width: 15em;
+  height: 3em;
+  font-size: 20px;
+  border-radius: 0.5em;
+  margin: 0.5em;
+  box-shadow: 0 0 1em rgba(0, 0, 0, 0.2);
+  color: white;
+  font-family: sans-serif;
+  text-transform: capitalize;
+  line-height: 3em;
+  transition: 0.3s;
+  cursor: pointer;
+  display: block;
+  background: linear-gradient(to right, orange, tomato);
+  text-align: left;
+  padding-left: 10%;
+  transform: perspective(500px) rotateY(45deg);
+}
+
+.button:hover {
+  transform: perspective(200px) rotateY(45deg);
+  padding-left: 5%;
+}
+.logo {
+  width: 458px;
+  height: 256.94px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  top: 0px;
+}
+
+.lobby_label {
+  position: absolute;
+  width: 300px;
+  height: 110px;
+  left: 565px;
+  top: 240px;
+
+  background: #fbff47;
+  mix-blend-mode: normal;
+  border: 1px solid #000000;
+  box-sizing: border-box;
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 37px;
+}
+.lobby_word {
+  position: relative;
+  width: 114px;
+  height: 41px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+
+  font-family: Evil Empire;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 36px;
+  line-height: 41px;
+
+  color: #000000;
+}
+.create_room {
+  position: relative;
+  margin-right: auto;
+  margin-left: auto;
+  width: 227px;
+  height: 60px;
+  top: 100px;
+
+  background: #968dff;
+  border-radius: 14px;
 }

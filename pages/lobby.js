@@ -19,59 +19,25 @@ export default function lobby() {
     <div id="body">
       <body
         style={{
-          backgroundImage: `url("https://p1.pxfuel.com/preview/388/463/722/skydiving-jump-falling-parachuting.jpg")`,
+          backgroundImage: `url("https://images04.military.com/sites/default/files/styles/full/public/2020-01/F15E-drops-bombs-afghanistan-1800.jpg")`,
           backgroundRepeat: "no-repeat",
-          backgroundSize: "cover"
+          backgroundSize: "cover",
         }}
       ></body>
 
-      <div style={{ textAlign: "center" }}>
-        <img
-          src="logo.png"
-          style={{ width: "458px", height: "256.94px" }}
-        ></img>
+      <div>
+        <img src="logo_black.png" className={styles.logo}></img>
       </div>
 
-      <div
-        style={{
-          width: "100%",
-          height: "40px",
-          left: "0px",
-          top: "0px",
-          background: "#FF8D8D",
-
-        }}
-      >
-        <h1
-          style={{
-            position: "absolute",
-            height: "42px",
-            left: "136px",
-            top: "240px",
-            color: "#000000",
-          }}
-        >
-          lobby
-        </h1>
+      <br></br>
+      <div id="Lobby label" className={styles.lobby_label}>
+        <p className={styles.lobby_word}>lobby</p>
       </div>
       <br></br>
       <div id="button-popup" style={{ textAlign: "center" }}>
         <Popup
           trigger={
-            <button
-              style={{
-                width: "227px",
-                height: "60px",
-                left: "72px",
-                top: "359px",
-
-                background: "#968DFF",
-                borderRadius: "14px",
-              }}
-            >
-              {" "}
-              Create a room
-            </button>
+            <button className={styles.create_room}> Create a room</button>
           }
           position="right center"
         >
@@ -110,9 +76,7 @@ export default function lobby() {
                 <option value="12x12">12x12</option>
               </select>
               <br></br>
-              <a href="game-play">
-                Done
-              </a>
+              <a href="game-play">Done</a>
             </form>
           </div>
         </Popup>
@@ -121,13 +85,14 @@ export default function lobby() {
         <div
           id="frame-for-room"
           style={{
-            alignItems: 'center'
+            alignItems: "center",
           }}
           className={styles.frame_room}
         >
-          <Room name="test" ></Room>
+          <Room name="test"></Room>
         </div>
       </div>
+      <br></br>
     </div>
   );
 }
