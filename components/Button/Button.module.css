@@ -1,0 +1,45 @@
+.btn {
+  border: 5px double #000000;
+  border-radius: 8px;
+  color: #000000;
+  display: inline-block;
+  font-family: "evil_empire";
+  font-size: 1.5rem;
+  letter-spacing: 0.1rem;
+  padding: 0.5rem;
+  position: relative;
+  text-decoration: none;
+  text-transform: uppercase;
+  background-color: #b5c3cf;
+}
+
+.btn:hover {
+  border: 5px solid #000000;
+}
+
+.btn:focus::before {
+  background-color: #c7831d;
+}
+
+.btn::before {
+  content: "";
+  background-color: #d4af5f;
+  box-shadow: 10px 10px 0 #d69814, 20px 20px 0 #d38a03;
+  position: absolute;
+  left: 0.25rem;
+  top: 0.5rem;
+  height: 102%;
+  width: 102%;
+  z-index: -1;
+  transition: all 0.4s ease;
+  margin-top: 1%;
+}
+
+.btn:hover::before {
+  box-shadow: none;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  margin-top: 1%;
+}

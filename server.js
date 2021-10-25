@@ -29,8 +29,9 @@ NextApp.prepare().then(() => {
     });
 
     socket.on("join-game", (roomName, username) => {
-      game.join(username, socket.id);
+      // game.join(username, socket.id);
       socket.join(roomName);
+      console.log("hi");
     });
 
     socket.on("disconnecting", () => {
