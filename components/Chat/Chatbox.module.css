@@ -1,0 +1,90 @@
+.chatBox {
+  border-top: 2px solid #d7d7d7;
+  border-bottom: 2px solid #d7d7d7;
+  margin: 0 5%;
+  height: 80%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  word-wrap: break-word;
+}
+
+/*
+Each player see his/her message having green background color.
+*/
+.myMessage {
+  background-color: rgb(170, 245, 189);
+  border-radius: 16px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  margin-right: 5%;
+}
+
+/*
+Each player see his/her name in the chatbox as green.
+*/
+.myMessage .senderDetail {
+  display: inline-block;
+  vertical-align: top;
+  width: 25%;
+  margin: 4px 4px;
+  background-color: rgb(118, 224, 145);
+  border-radius: 16px;
+}
+
+/*
+Each player see the enemy's message as having red background
+color.
+*/
+.enemyMessage {
+  background-color: rgb(245, 190, 190);
+  border-radius: 16px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  margin-right: 5%;
+}
+
+/*
+Enemy's name also has red background color.
+*/
+.enemyMessage .senderDetail {
+  display: inline-block;
+  vertical-align: top;
+  width: 25%;
+  margin: 4px 4px;
+  background-color: rgb(241, 148, 148);
+  border-radius: 16px;
+}
+
+/*
+A CSS rule for styling the name of player who
+send the message.
+*/
+.senderName {
+  font-family: sans-serif;
+  text-align: center;
+  font-weight: normal;
+  font-size: small;
+  margin: 0.2em;
+}
+
+/*
+A CSS rule for styling send times of messages.
+*/
+.sendTime {
+  font-family: sans-serif;
+  text-align: center;
+  font-weight: normal;
+  font-size: small;
+  margin: 0.2em;
+}
+
+/*
+A CSS rule for styling text messages.
+*/
+.message {
+  display: inline-block;
+  vertical-align: middle;
+  width: 70%;
+  margin: 0 0px;
+  font-size: small;
+}

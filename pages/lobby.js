@@ -4,7 +4,8 @@ import "reactjs-popup/dist/index.css";
 import Link from "next/link";
 import { Room } from "../components/Room";
 import styles from "../styles/lobby.module.css";
-export default function lobby() {
+
+export default function Lobby() {
   const [form, setForm] = useState({ username: "", room_name: "", mode: "" });
   const submitRoom = (event) => {
     event.preventDefault();
