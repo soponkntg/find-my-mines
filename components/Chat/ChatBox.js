@@ -1,16 +1,15 @@
 import React from "react";
-import "./Chat.module.css";
+import styles from "./Chat.module.css";
 
 export const ChatBox = () => {
-  /* Sorry for the hardcode.*/
   return (
-    <div class="chatBox">
-      <div class="myMessage">
-        <div class="senderDetail">
-          <div class="senderName">Player1</div>
-          <div class="sendTime">18:59</div>
+    <div className={styles.chatBox}>
+      <div className={styles.myMessage}>
+        <div className={styles.senderDetail}>
+          <div className={styles.senderName}>Player1</div>
+          <div className={styles.sendTime}>18:59</div>
         </div>
-        <div class="message">
+        <div className={styles.message}>
           Hello, I am player 1. Lorem ipsum dolor sit amet, consectetur
           adipiscing elit. In tempus odio a ullamcorper facilisis. Nullam
           sodales blandit arcu id imperdiet. Nullam pulvinar risus quam, at
@@ -23,12 +22,12 @@ export const ChatBox = () => {
           Morbi faucibus viverra est, sit amet finibus nisi egestas ac.
         </div>
       </div>
-      <div class="enemyMessage">
-        <div class="senderDetail">
-          <div class="senderName">Player2</div>
-          <div class="sendTime">19:07</div>
+      <div className={styles.enemyMessage}>
+        <div className={styles.senderDetail}>
+          <div className={styles.senderName}>Player2</div>
+          <div className={styles.sendTime}>19:07</div>
         </div>
-        <div class="message">
+        <div className={styles.message}>
           Hello, I am player 2. Suspendisse vitae nisi tincidunt, commodo elit
           sed, vehicula velit. Suspendisse potenti. Sed ut rutrum risus, quis
           fringilla mauris. Mauris semper felis et libero scelerisque venenatis.

@@ -1,14 +1,14 @@
 import React from "react";
-import "./MessageForm.module.css";
+import styles from "./MessageForm.module.css";
 
-export const messageForm = () => {
+export const MessageForm = () => {
   return (
-    <form class="messageForm">
+    <form className={styles.messageForm}>
       <input
-        class="messageInput"
+        className={styles.messageInput}
         placeholder="Say something ... (Press ENTER to send)"
       ></input>
-      <button class="sendButton">Send</button>
+      <button className={styles.sendButton}>Send</button>
     </form>
   );
 };
