@@ -14,6 +14,8 @@ export const Grid = () => {
   };
   return (
     <div className={styles.center}>
+      <body style={{ backgroundImage: `url("https://c.tenor.com/1Aizsst6yQEAAAAM/boom-explode.gif")`, backgroundSize: 'cover' }}>
+      </body>
       <div className={styles.container}>
         <div className={styles.grid}>{renderGrid()}</div>
       </div>
