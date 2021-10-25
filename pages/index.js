@@ -1,4 +1,5 @@
 import styles from "../Styles/Home.module.css";
+import "../public/unknown.png";
 
 export default function Home() {
   return (
@@ -10,7 +11,7 @@ export default function Home() {
       </head>
       <div style={{
         textAlign: 'center',
-        marginTop: '30vh',
+        marginTop: '8vh',
       }} >
         <div className={styles.center}>
           {/* <svg viewBox="0 0 500 500">
@@ -21,8 +22,9 @@ export default function Home() {
               </textPath>
             </text>
           </svg> */}
-          <h1 className={styles.txt} style={{ fontSize: "5rem" }}>Find My Mines</h1>
-          <h2 className={styles.txt}>Do you mind? to Find My Mines</h2>
+          <img src='unknown.png' style={{ height: '450px' }} />
+          {/* <h1 className={styles.txt} style={{ fontSize: "5rem" }}>Find My Mines</h1> */}
+          <h2 className={styles.txt} style={{ fontSize: "2rem" }}>Do you mind? to Find My Mines</h2>
           <input
             type="text"
             placeholder='Enter Username'
