@@ -3,67 +3,76 @@ import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 import Link from "next/link";
 import { Room } from "../components/Room";
+import { Logo } from "../components/Logo";
 import styles from "../styles/lobby.module.css";
-import Image from "next/image";
-import Logo from "../public/logo_black.png";
+import { Button } from "../components/Button";
+import { Modal } from "../components/Modal";
+import { Input } from "../components/Input";
+import { useRouter } from "next/router";
 
 export default function Lobby() {
-  const [form, setForm] = useState({ username: "", room_name: "", mode: "" });
-  const submitRoom = (event) => {
-    event.preventDefault();
-    // alert(`So your name is ${event.target.username.value}`);
-  };
-  const test = (event) => {
-    // setForm({...form, event.target.name : event.target.value})
-  };
-  console.log(form);
+  const [roomName, setRoomName] = useState("");
+  const [modal, setModal] = useState(false);
+  const router = useRouter();
 
+  const closeModal = () => {
+    setModal(false);
+  };
+
+  const createRoom = () => {
+    setModal(false);
+  };
+
+  const joinRoom = (roomName) => {
+    console.log(roomName);
+    router.push("game-play");
+  };
   return (
     <div className={styles.center}>
-      <Image src={Logo} alt="Logo" width={400} height={220} />
-
-      <Popup
-        trigger={<button className={styles.create_room}> Create a room</button>}
-        position="right center"
+      <Logo />
+      <Button
+        onClickHandler={() => {
+          setModal(true);
+        }}
       >
-        <form onSubmit={submitRoom}>
-          <span>Username</span>
-          <input
-            type="text"
-            name="username"
-            value={form.username}
-            onChange={(e) => {
-              setForm({ ...form, username: e.target.value });
-            }}
-          ></input>
-          <br></br>
+        Create a room
+      </Button>
+      <div className={styles["room-container"]}>
+        <Room
+          roomName={"room1"}
+          playes={"2"}
+          onClickHnadler={joinRoom.bind(null, "room1")}
+        />
+        <Room
+          roomName={"room2"}
+          playes={"2"}
+          onClickHnadler={joinRoom.bind(null, "room2")}
+        />
+        <Room
+          roomName={"room3"}
+          playes={"2"}
+          onClickHnadler={joinRoom.bind(null, "room3")}
+        />
+      </div>
+
+      <Modal
+        open={modal}
+        onClose={closeModal}
+        onConfirm={createRoom}
+        title="Create Room"
+      >
+        <div className={styles["room-name-input"]}>
           <span>Room name</span>
-          <input
+          <Input
             type="text"
             name="room_name"
-            value={form.room_name}
-            onChange={(e) => {
-              setForm({ ...form, room_name: e.target.value });
+            val={roomName}
+            onChangeHandler={(e) => {
+              setRoomName(e.target.value);
             }}
-          ></input>
-          <br></br>
-          <span>Mode</span>
-          <br></br>
-          <select
-            name="mode"
-            value={form.mode}
-            onChange={(e) => {
-              setForm({ ...form, mode: e.target.value });
-            }}
-          >
-            <option value="6x6">6x6</option>
-            <option value="12x12">12x12</option>
-          </select>
-          <br></br>
-          <a href="game-play">Done</a>
-        </form>
-      </Popup>
-      <br></br>
+          />
+        </div>
+      </Modal>
     </div>
   );
 }

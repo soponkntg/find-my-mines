@@ -12,7 +12,7 @@ export default function Instruction() {
   };
 
   return (
-    <div className={styles.center} style={{ paddingTop: "50px" }}>
+    <div className={styles.center}>
       <h1 style={{ fontSize: "5rem" }}>How to play</h1>
       <div style={{ fontSize: "2rem" }}>
         <item className={styles.txt}>

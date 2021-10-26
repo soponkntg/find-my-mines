@@ -34,7 +34,7 @@ export default function Home() {
   console.log(username);
 
   return (
-    <div className={styles.center} style={{ paddingTop: "50px" }}>
+    <div className={styles.center}>
       <Logo />
       <h2 style={{ fontSize: "2rem", marginBottom: "60px" }}>
         Do you mind? to Find My Mines
