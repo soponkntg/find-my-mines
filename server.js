@@ -4,7 +4,7 @@ app.use(require("cors")());
 const http = require("http").Server(app);
 const io = require("socket.io")(http, {
   cors: {
-    origin: "*",
+    origin: ["*", "https://admin.socket.io", "http://localhost:3000/"],
     methods: ["GET", "POST"],
   },
 });
@@ -14,6 +14,7 @@ const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== "production";
 const NextApp = next({ dev });
 const handle = NextApp.getRequestHandler();
+const { instrument } = require("@socket.io/admin-ui");
 
 let roomList = [
   {
@@ -185,4 +186,8 @@ NextApp.prepare().then(() => {
   http.listen(port, () => {
     console.log(`> Ready on http://localhost:${port}`);
   });
+});
+
+instrument(io, {
+  auth: false,
 });
