@@ -16,16 +16,7 @@ const NextApp = next({ dev });
 const handle = NextApp.getRequestHandler();
 const { instrument } = require("@socket.io/admin-ui");
 
-let roomList = [
-  {
-    id: uuidv4(),
-    roomName: "testeiei",
-    player: [
-      { id: "sdkfj", username: "so", score: 0 },
-      { id: "sdkfasda", username: "mick", score: 0 },
-    ],
-  },
-];
+let roomList = [];
 
 let interval;
 
@@ -187,8 +178,6 @@ NextApp.prepare().then(() => {
     });
 
     socket.on("new-message", (message, id) => {
-      console.log(message);
-      console.log(id);
       io.of("/find-my-mines").to(id).emit("message-from-server", message);
     });
 
@@ -224,5 +213,9 @@ NextApp.prepare().then(() => {
 });
 
 instrument(io, {
-  auth: false,
+  auth: {
+    type: "basic",
+    username: "admin",
+    password: "$2b$10$n/.n3VT3CX8mhlQl/QXCO.dNyswuCWt8LeGVX97e.vFe0XRRqUaUe",
+  },
 });
