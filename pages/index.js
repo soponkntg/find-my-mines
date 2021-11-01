@@ -3,7 +3,6 @@ import styles from "../Styles/Home.module.css";
 import { Button } from "../components/Button";
 import { Input } from "../components/Input";
 import { Logo } from "../components/Logo";
-
 import { useRouter } from "next/router";
 import Context from "../store";
 import io from "socket.io-client";
@@ -16,7 +15,6 @@ export default function Home() {
   useEffect(() => {
     const socket = io("/find-my-mines");
     context.setSocket(socket);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const toHTW = () => {

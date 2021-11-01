@@ -1,7 +1,4 @@
-import React, { useState } from "react";
-import Popup from "reactjs-popup";
-import "reactjs-popup/dist/index.css";
-import Link from "next/link";
+import React, { useContext, useEffect, useState } from "react";
 import { Room } from "../components/Room";
 import { Logo } from "../components/Logo";
 import styles from "../styles/lobby.module.css";
@@ -10,21 +7,40 @@ import { Modal } from "../components/Modal";
 import { Input } from "../components/Input";
 import { useRouter } from "next/router";
 
+import Context from "../store";
+
 export default function Lobby() {
   const [roomName, setRoomName] = useState("");
   const [modal, setModal] = useState(false);
+  const [roomList, setRoomList] = useState([]);
   const router = useRouter();
+  const context = useContext(Context);
+
+  useEffect(() => {
+    context.socket.emit("lobby");
+    context.socket.on("room-list", (roomlst) => {
+      setRoomList(roomlst);
+    });
+  }, []);
 
   const closeModal = () => {
     setModal(false);
   };
 
   const createRoom = () => {
+    context.socket.emit("create-room", roomName, context.username);
+    context.setRoomName(roomName);
     setModal(false);
+    router.push("game-play");
   };
 
-  const joinRoom = (roomName) => {
-    console.log(roomName);
+  const joinRoom = (room) => {
+    if (room.player.length === 2) {
+      alert("This room is full");
+      return;
+    }
+    context.setRoomName(room.roomName);
+    context.socket.emit("join-game", room.id, context.username);
     router.push("game-play");
   };
   return (
@@ -38,21 +54,14 @@ export default function Lobby() {
         Create a room
       </Button>
       <div className={styles["room-container"]}>
-        <Room
-          roomName={"room1"}
-          playes={"2"}
-          onClickHnadler={joinRoom.bind(null, "room1")}
-        />
-        <Room
-          roomName={"room2"}
-          playes={"2"}
-          onClickHnadler={joinRoom.bind(null, "room2")}
-        />
-        <Room
-          roomName={"room3"}
-          playes={"2"}
-          onClickHnadler={joinRoom.bind(null, "room3")}
-        />
+        {roomList.map((room, index) => (
+          <Room
+            key={index}
+            roomName={room.roomName}
+            player={room.player.length}
+            onClickHnadler={joinRoom.bind(null, room)}
+          />
+        ))}
       </div>
 
       <Modal

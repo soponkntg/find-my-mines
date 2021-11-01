@@ -6,11 +6,14 @@ const Context = React.createContext({
   setSocket: () => {},
   username: "",
   setUsername: () => {},
+  roomName: "",
+  setRoomName: () => {},
 });
 
 export const ContextProvider = (props) => {
   const [socket, setSocket] = useState(null);
   const [username, setUsername] = useState("");
+  const [roomName, setRoomName] = useState("");
 
   return (
     <Context.Provider
@@ -19,6 +22,8 @@ export const ContextProvider = (props) => {
         setSocket: setSocket,
         username: username,
         setUsername: setUsername,
+        roomName: roomName,
+        setRoomName: setRoomName,
       }}
     >
       {props.children}
