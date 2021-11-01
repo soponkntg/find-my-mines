@@ -88,3 +88,17 @@
   align-items: center;
   justify-content: space-around;
 }
+
+.bottomright {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+  width: 20%;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px 0;
+}

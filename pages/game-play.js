@@ -5,16 +5,19 @@ import styles from "../styles/Game.module.css";
 import { BombBox } from "../components/BombBox";
 import { Chat } from "../components/Chat";
 import { Button } from "../components/Button";
-
-let interval;
+import { Music } from "../components/Music";
 
 export default function GamePLay() {
   const context = useContext(Context);
   const [game, setGame] = useState(undefined);
   const [turn, setTurn] = useState(false);
+  const [message, setMessage] = useState([]);
   const [timer, setTimer] = useState(10);
 
   useEffect(() => {
+    if (!context.socket) {
+      window.open("/", "_self");
+    }
     context.socket.on("both-player-ready", (roomFromServer) => {
       console.log(roomFromServer);
       setGame(roomFromServer);
@@ -29,26 +32,27 @@ export default function GamePLay() {
       console.log("changeturn");
       setGame(roomFromServer);
       setTurn((prev) => !prev);
-      setTimer(10);
     });
     context.socket.on("game-end", (roomFromServer) => {
       setGame(roomFromServer);
     });
+    context.socket.on("message-from-server", (newMessage) => {
+      setMessage((prev) => [...prev, newMessage]);
+    });
     context.socket.on("other-player exit", () => {
-      window.open("about:blank", "_self");
-      window.close();
       alert("other play exited");
+      window.open("/", "_self");
     });
   }, []);
 
   const gridClickHandler = (index) => {
-    clearInterval(interval);
     context.socket.emit("click", game, index);
   };
 
   const restartGame = () => {
     context.socket.emit("new-game", game);
   };
+  console.log(message);
 
   return (
     <div className={styles.center}>
@@ -66,8 +70,8 @@ export default function GamePLay() {
               <h3>{game.firstPlayer.score}</h3>
             </div>
             <div className={styles.score}>
-              {turn && <h4>✅ YOUR TURN ✅</h4>}
-              {!turn && <h4>❌ OPPONENT TURN ❌</h4>}
+              {turn && <h4>{`✅ YOUR TURN, ${context.username}✅`}</h4>}
+              {!turn && <h4>{`❌ OPPONENT TURN, ${context.username}❌`}</h4>}
               <h3>{timer}</h3>
             </div>
             <div className={styles.player}>
@@ -94,15 +98,13 @@ export default function GamePLay() {
               </div>
             </div>
           )}
-          {!game.bomb && (
+          {!game.bomb && game.winner && (
             <div className={styles.restart}>
-              {game.winner && <h2>{`winner is ${game.winner.username}`}</h2>}
-              {!game.winner && <h2>{`This match is draw`}</h2>}
+              <h2>{`winner is ${game.winner.username}`}</h2>
               <div className={styles.twobtn}>
                 <Button
                   onClickHandler={() => {
-                    window.open("about:blank", "_self");
-                    window.close();
+                    window.open("/", "_self");
                   }}
                 >
                   EXIT!
@@ -111,7 +113,29 @@ export default function GamePLay() {
               </div>
             </div>
           )}
-          <Chat />
+          <Chat
+            message={message}
+            username={context.username}
+            socket={context.socket}
+            id={game.id}
+          />
+          <div className={styles.bottomright}>
+            <Music />
+            <Button
+              onClickHandler={() => {
+                context.socket.emit("reset-score", game);
+              }}
+            >
+              Reset Score
+            </Button>
+            <Button
+              onClickHandler={() => {
+                window.open("/", "_self");
+              }}
+            >
+              Exit
+            </Button>
+          </div>
         </>
       )}
     </div>

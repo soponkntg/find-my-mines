@@ -4,7 +4,7 @@ app.use(require("cors")());
 const http = require("http").Server(app);
 const io = require("socket.io")(http, {
   cors: {
-    origin: ["*", "https://admin.socket.io", "http://localhost:3000/"],
+    origin: ["*"],
     methods: ["GET", "POST"],
   },
 });
@@ -30,7 +30,7 @@ let roomList = [
 const randomGrid = () => {
   const bombGrid = [];
   const randomBomb = [];
-  while (randomBomb.length <= 6) {
+  while (randomBomb.length <= 11) {
     const random = Math.floor(Math.random() * 36) + 1;
     if (randomBomb.indexOf(random) === -1) {
       randomBomb.push(random);
@@ -95,7 +95,6 @@ NextApp.prepare().then(() => {
           .emit("both-player-ready", {
             ...game,
             bomb: bomb,
-            turn: randomPlayer,
             firstPlayer: { ...game.player[randomPlayer], score: 0, win: "" },
             secondPlayer: {
               ...game.player[randomPlayer === 1 ? 0 : 1],
@@ -118,19 +117,15 @@ NextApp.prepare().then(() => {
         game.bombFound += 1;
         game[whoseTurn].score += 1;
       }
-      if (game.bombFound === 6) {
+      if (game.bombFound === 11) {
         if (game.firstPlayer.score > game.secondPlayer.score) {
           game.firstPlayer.win += "⭐️";
           game.winner = game.firstPlayer;
         } else if (game.firstPlayer.score < game.secondPlayer.score) {
           game.secondPlayer.win += "⭐️";
           game.winner = game.secondPlayer;
-        } else {
-          game.winner = undefined;
         }
         game.bomb = undefined;
-        game.firstPlayer.score = 0;
-        game.secondPlayer.score = 0;
         io.of("/find-my-mines").to(game.id).emit("game-end", game);
       } else {
         io.of("/find-my-mines").to(game.id).emit("change-turn", game);
@@ -141,20 +136,36 @@ NextApp.prepare().then(() => {
 
     socket.on("new-game", (game) => {
       console.log("new game");
-      const randomPlayer = Math.floor(Math.random() * 2);
+      game.firstPlayer.score = 0;
+      game.secondPlayer.score = 0;
+      game.winner.score = 0;
+      game.bombFound = 0;
       game.bomb = randomGrid();
-      game.turn = randomPlayer;
+      if (game.winner.id === game.secondPlayer.id) {
+        game.secondPlayer = game.firstPlayer;
+        game.firstPlayer = game.winner;
+      }
       game.winner = undefined;
-      game.firstPlayer =
-        randomPlayer === 0 ? game.firstPlayer : game.secondPlayer;
-      game.secondPlayer =
-        randomPlayer === 0 ? game.secondPlayer : game.firstPlayer;
       io.of("/find-my-mines").to(game.id).emit("both-player-ready", game);
     });
 
     socket.on("timeout", (game) => {
       console.log(game);
       io.of("/find-my-mines").to(game.id).emit("change-turn", game);
+    });
+
+    socket.on("reset-score", (game) => {
+      game.firstPlayer.score = 0;
+      game.secondPlayer.score = 0;
+      game.bombFound = 0;
+      game.bomb = randomGrid();
+      io.of("/find-my-mines").to(game.id).emit("both-player-ready", game);
+    });
+
+    socket.on("new-message", (message, id) => {
+      console.log(message);
+      console.log(id);
+      io.of("/find-my-mines").to(id).emit("message-from-server", message);
     });
 
     socket.on("disconnect", () => {
@@ -166,10 +177,12 @@ NextApp.prepare().then(() => {
           }
         }
       });
-      const roomID = roomList[index].id;
-      io.of("/find-my-mines").to(roomID).emit("other-player exit");
+      console.log(index);
+      console.log(roomList);
       if (index !== -1) {
+        const roomID = roomList[index].id;
         roomList.splice(index, 1);
+        io.of("/find-my-mines").to(roomID).emit("other-player exit");
       }
       io.of("/find-my-mines").emit("room-list", roomList);
     });
