@@ -27,6 +27,8 @@ let roomList = [
   },
 ];
 
+let interval;
+
 const randomGrid = () => {
   const bombGrid = [];
   const randomBomb = [];
@@ -105,10 +107,20 @@ NextApp.prepare().then(() => {
             bombFound: 0,
             winner: undefined,
           });
+        let timer = 9;
+        interval = setInterval(() => {
+          if (timer === 0) {
+            timer = 10;
+            io.of("/find-my-mines").to(roomId).emit("time-out-from-server");
+          }
+          io.of("/find-my-mines").to(roomId).emit("timer", timer);
+          timer -= 1;
+        }, 1000);
       }, 3000);
     });
 
     socket.on("click", (game, index) => {
+      clearInterval(interval);
       const hasBomb = game.bomb[index].bomb;
       const whoseTurn =
         socket.id === game.firstPlayer.id ? "firstPlayer" : "secondPlayer";
@@ -129,9 +141,16 @@ NextApp.prepare().then(() => {
         io.of("/find-my-mines").to(game.id).emit("game-end", game);
       } else {
         io.of("/find-my-mines").to(game.id).emit("change-turn", game);
+        let timer = 9;
+        interval = setInterval(() => {
+          if (timer === 0) {
+            timer = 10;
+            io.of("/find-my-mines").to(game.id).emit("time-out-from-server");
+          }
+          io.of("/find-my-mines").to(game.id).emit("timer", timer);
+          timer -= 1;
+        }, 1000);
       }
-      console.log(game);
-      console.log("------------------------------------------------------");
     });
 
     socket.on("new-game", (game) => {
@@ -147,11 +166,16 @@ NextApp.prepare().then(() => {
       }
       game.winner = undefined;
       io.of("/find-my-mines").to(game.id).emit("both-player-ready", game);
-    });
-
-    socket.on("timeout", (game) => {
-      console.log(game);
-      io.of("/find-my-mines").to(game.id).emit("change-turn", game);
+      let timer = 9;
+      interval = setInterval(() => {
+        console.log(timer);
+        if (timer === 0) {
+          timer = 10;
+          io.of("/find-my-mines").to(game.id).emit("time-out-from-server");
+        }
+        io.of("/find-my-mines").to(game.id).emit("timer", timer);
+        timer -= 1;
+      }, 1000);
     });
 
     socket.on("reset-score", (game) => {
@@ -177,8 +201,6 @@ NextApp.prepare().then(() => {
           }
         }
       });
-      console.log(index);
-      console.log(roomList);
       if (index !== -1) {
         const roomID = roomList[index].id;
         roomList.splice(index, 1);

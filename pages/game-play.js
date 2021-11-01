@@ -19,8 +19,8 @@ export default function GamePLay() {
       window.open("/", "_self");
     }
     context.socket.on("both-player-ready", (roomFromServer) => {
-      console.log(roomFromServer);
       setGame(roomFromServer);
+      setTimer(10);
       if (roomFromServer.firstPlayer.id === context.socket.id) {
         setTurn(true);
       } else {
@@ -28,12 +28,19 @@ export default function GamePLay() {
       }
     });
     context.socket.on("change-turn", (roomFromServer) => {
-      console.log(roomFromServer);
-      console.log("changeturn");
+      setTimer(10);
       setGame(roomFromServer);
       setTurn((prev) => !prev);
     });
+    context.socket.on("timer", (time) => {
+      setTimer(time);
+    });
+    context.socket.on("time-out-from-server", (timer) => {
+      setTurn((prev) => !prev);
+      setTimer(timer);
+    });
     context.socket.on("game-end", (roomFromServer) => {
+      setTimer("GAME END!");
       setGame(roomFromServer);
     });
     context.socket.on("message-from-server", (newMessage) => {
@@ -52,7 +59,6 @@ export default function GamePLay() {
   const restartGame = () => {
     context.socket.emit("new-game", game);
   };
-  console.log(message);
 
   return (
     <div className={styles.center}>

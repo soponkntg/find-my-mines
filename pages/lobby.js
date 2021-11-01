@@ -17,6 +17,9 @@ export default function Lobby() {
   const context = useContext(Context);
 
   useEffect(() => {
+    if (!context.socket) {
+      window.open("/", "_self");
+    }
     context.socket.emit("lobby");
     context.socket.on("room-list", (roomlst) => {
       setRoomList(roomlst);
