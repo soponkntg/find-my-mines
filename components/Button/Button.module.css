@@ -10,14 +10,14 @@
   position: relative;
   text-decoration: none;
   text-transform: uppercase;
-  background-color: #b5c3cf;
+  background-color: #e0b778;
 }
 
 .btn:hover {
   border: 5px solid #000000;
 }
 
-.btn:focus::before {
+.btn:focus {
   background-color: #c7831d;
 }
 
@@ -43,3 +43,4 @@
   height: 100%;
   margin-top: 1%;
 }
+

@@ -6,6 +6,7 @@ import { Logo } from "../components/Logo";
 import { useRouter } from "next/router";
 import Context from "../store";
 import io from "socket.io-client";
+import { Music } from "../components/Music";
 
 export default function Home() {
   const [username, setUsername] = useState("");
@@ -32,24 +33,28 @@ export default function Home() {
   console.log(username);
 
   return (
-    <div className={styles.center}>
-      <Logo />
-      <h2 style={{ fontSize: "2rem", marginBottom: "60px" }}>
-        Do you mind? to Find My Mines
-      </h2>
-      <Input
-        type="text"
-        placeholder="Enter Username"
-        align="center"
-        fontWeight="bold"
-        val={username}
-        onChangeHandler={(e) => {
-          setUsername(e.target.value);
-        }}
-      />
-      <div className={styles["btn-container"]}>
-        <Button onClickHandler={toBegin}>Begin 🔥</Button>
-        <Button onClickHandler={toHTW}>How to play ❓</Button>
+    <div>
+      <div className={styles.center}>
+        <Logo />
+        <h2 style={{ fontSize: "2rem", marginBottom: "60px" }}>
+          Do you mind? to Find My Mines
+        </h2>
+        <Input
+          type="text"
+          placeholder="Enter Username"
+          align="center"
+          fontWeight="bold"
+          val={username}
+          onChangeHandler={(e) => {
+            setUsername(e.target.value);
+          }}
+        />
+        <div className={styles["btn-container"]}>
+
+          <Button onClickHandler={toBegin}>Begin 🔥</Button>
+          <Button onClickHandler={toHTW}>How to play ❓</Button>
+        </div>
+
       </div>
     </div>
   );
