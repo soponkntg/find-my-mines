@@ -48,7 +48,7 @@ export default function GamePLay() {
     });
     context.socket.on("other-player exit", () => {
       alert("other play exited");
-      window.open("lobby", "_self");
+      window.open("/", "_self");
     });
   }, []);
 
@@ -64,9 +64,6 @@ export default function GamePLay() {
     <div className={styles.center}>
       {!game && (
         <>
-          {/* <div style={{ position: "absolute", right: "0" }}>
-            <Music />;
-          </div> */}
           <h1
             className={styles.waiting}
           >{`Hello ${context.username}, please wait for other player`}</h1>
@@ -116,7 +113,7 @@ export default function GamePLay() {
               <div className={styles.twobtn}>
                 <Button
                   onClickHandler={() => {
-                    window.open("lobby", "_self");
+                    window.open("/", "_self");
                   }}
                 >
                   EXIT!
@@ -143,7 +140,7 @@ export default function GamePLay() {
             </Button>
             <Button
               onClickHandler={() => {
-                window.open("lobby", "_self");
+                window.open("/", "_self");
               }}
             >
               Exit

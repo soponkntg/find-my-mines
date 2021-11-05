@@ -6,7 +6,6 @@ import { Logo } from "../components/Logo";
 import { useRouter } from "next/router";
 import Context from "../store";
 import io from "socket.io-client";
-import { Music } from "../components/Music";
 
 export default function Home() {
   const [username, setUsername] = useState("");

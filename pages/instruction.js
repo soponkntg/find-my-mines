@@ -3,7 +3,6 @@ import React from "react";
 import { Button } from "../components/Button";
 import styles from "../Styles/Home.module.css";
 import { useRouter } from "next/router";
-import { Music } from "../components/Music";
 
 
 export default function Instruction() {
@@ -15,9 +14,6 @@ export default function Instruction() {
 
   return (
     <div>
-      {/* <div style={{ position: "absolute", right: "0" }}>
-        <Music />;
-      </div> */}
       <div className={styles.center}>
         <h1 style={{ fontSize: "5rem" }}>How to play</h1>
         <div style={{ fontSize: "2rem" }}>

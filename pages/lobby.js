@@ -50,9 +50,7 @@ export default function Lobby() {
   };
   return (
     <div>
-      {/* <div style={{ position: "absolute", right: "0" }}>
-        <Music />;
-      </div> */}
+
       <div className={styles.center}>
         <Logo />
         <Button
