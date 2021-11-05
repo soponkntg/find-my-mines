@@ -1,7 +1,6 @@
-import react, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import styles from "../styles/Admin.module.css";
 import io from "socket.io-client";
-import { Room } from "../components/Room";
 import { Button } from "../components/Button";
 import { Modal } from "../components/Modal";
 import { Input } from "../components/Input";
@@ -26,6 +25,7 @@ export default function Admin() {
         setRooms(roomList);
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const authHandler = () => {

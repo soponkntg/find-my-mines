@@ -24,6 +24,7 @@ export default function Lobby() {
     context.socket.on("room-list", (roomlst) => {
       setRoomList(roomlst);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const closeModal = () => {
