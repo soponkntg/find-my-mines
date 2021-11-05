@@ -52,6 +52,12 @@ export default function GamePLay() {
     });
   }, []);
 
+  useEffect(() => {
+    context.socket.on("trigger-reset-score", () => {
+      context.socket.emit("reset-score", game);
+    });
+  }, [game]);
+
   const gridClickHandler = (index) => {
     context.socket.emit("click", game, index);
   };
