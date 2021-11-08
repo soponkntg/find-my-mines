@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import io from "socket.io-client";
 import Context from "../store";
-import styles from "../styles/game.module.css";
+import styles from "../styles/Game.module.css";
 import { BombBox } from "../components/BombBox";
 import { Chat } from "../components/Chat";
 import { Button } from "../components/Button";
