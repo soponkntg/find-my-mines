@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import styles from "../styles/Admin.module.css";
+import styles from "../styles/admin.module.css";
 import io from "socket.io-client";
 import { Button } from "../components/Button";
 import { Modal } from "../components/Modal";
