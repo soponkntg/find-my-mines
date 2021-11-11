@@ -50,7 +50,6 @@ export default function GamePLay() {
       alert("other play exited");
       window.open("/", "_self");
     });
-    
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
