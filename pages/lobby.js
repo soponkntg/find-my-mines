@@ -47,6 +47,7 @@ export default function Lobby() {
     }
     context.setRoomName(room.roomName);
     context.socket.emit("join-game", room.id, context.username);
+    context.setRoomId(room.id)
     router.push("game-play");
   };
   return (

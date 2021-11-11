@@ -194,8 +194,41 @@ NextApp.prepare().then(() => {
     });
 
     socket.on("reset-score-from-server", (roomid) => {
-      socket.broadcast.to(roomid).emit("trigger-reset-score");
+     io.of("/find-my-mines").to(roomid).emit("trigger-reset-score");
     });
+
+    socket.on("reset-new-game", (roomId) => {
+      clearInterval(interval);
+      const randomPlayer = Math.floor(Math.random() * 2);
+      const bomb = randomGrid();
+      const game = roomList.filter((room) => {
+        return room.id === roomId;
+      })[0];
+      io.of("/find-my-mines")
+          .to(roomId)
+          .emit("both-player-ready", {
+            ...game,
+            bomb: bomb,
+            firstPlayer: { ...game.player[randomPlayer], score: 0, win: "" },
+            secondPlayer: {
+              ...game.player[randomPlayer === 1 ? 0 : 1],
+              score: 0,
+              win: "",
+            },
+            bombSymbol: "💣",
+            bombFound: 0,
+            winner: undefined,
+          });
+        let timer = 9;
+        interval = setInterval(() => {
+          if (timer === 0) {
+            timer = 10;
+            io.of("/find-my-mines").to(roomId).emit("time-out-from-server");
+          }
+          io.of("/find-my-mines").to(roomId).emit("timer", timer);
+          timer -= 1;
+        }, 1000);
+    })
 
     socket.on("new-message", (message, id) => {
       io.of("/find-my-mines").to(id).emit("message-from-server", message);

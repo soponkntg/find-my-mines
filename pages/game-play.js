@@ -50,15 +50,18 @@ export default function GamePLay() {
       alert("other play exited");
       window.open("/", "_self");
     });
+    
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if(context.socket) {
-    context.socket.on("trigger-reset-score", () => {
-    console.log(game);
-    context.socket.emit("reset-score", game);
-  });
-  }
+  useEffect(() => {
+    if(context.roomId) {
+      context.socket.on("trigger-reset-score", () => {
+      console.log(context.roomId);
+      context.socket.emit("reset-new-game", context.roomId);
+      });
+    }
+  }, [context.roomId])
 
   const gridClickHandler = (index) => {
     context.socket.emit("click", game, index);
