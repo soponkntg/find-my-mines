@@ -28,6 +28,8 @@ export default function Admin() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  console.log(rooms);
+
   const authHandler = () => {
     if (username === "admin" && password === "admin") {
       setOpen(false);
