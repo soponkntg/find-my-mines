@@ -161,7 +161,6 @@ NextApp.prepare().then(() => {
       io.of("/find-my-mines").to(game.id).emit("both-player-ready", game);
       let timer = 9;
       interval = setInterval(() => {
-        console.log(timer);
         if (timer === 0) {
           timer = 10;
           io.of("/find-my-mines").to(game.id).emit("time-out-from-server");
@@ -179,6 +178,15 @@ NextApp.prepare().then(() => {
         game.bombFound = 0;
         game.bomb = randomGrid();
         io.of("/find-my-mines").to(game.id).emit("both-player-ready", game);
+        let timer = 9;
+        interval = setInterval(() => {
+          if (timer === 0) {
+            timer = 10;
+            io.of("/find-my-mines").to(game.id).emit("time-out-from-server");
+          }
+          io.of("/find-my-mines").to(game.id).emit("timer", timer);
+          timer -= 1;
+        }, 1000);
       } catch (error) {
         console.error(error);
       }
