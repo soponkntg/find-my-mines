@@ -172,11 +172,20 @@ NextApp.prepare().then(() => {
     });
 
     socket.on("reset-score", (game) => {
-      game.firstPlayer.score = 0;
-      game.secondPlayer.score = 0;
-      game.bombFound = 0;
-      game.bomb = randomGrid();
-      io.of("/find-my-mines").to(game.id).emit("both-player-ready", game);
+      console.log(game.firstPlayer);
+      console.log(game.secondPlayer);
+      console.log("_____________________________________________")
+      try{
+        game.firstPlayer.score = 0;
+        game.secondPlayer.score = 0;
+        game.bombFound = 0;
+        game.bomb = randomGrid();
+        io.of("/find-my-mines").to(game.id).emit("both-player-ready", game);
+      } catch (error) {
+        console.error(error);
+        // expected output: ReferenceError: nonExistentFunction is not defined
+        // Note - error messages will vary depending on browser
+      }
     });
 
     socket.on("reset-score-from-server", (roomid) => {

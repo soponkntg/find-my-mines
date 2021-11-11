@@ -55,6 +55,7 @@ export default function GamePLay() {
 
   useEffect(() => {
     context.socket.on("trigger-reset-score", () => {
+      console.log(game);
       context.socket.emit("reset-score", game);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
