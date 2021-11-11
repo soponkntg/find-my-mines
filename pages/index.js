@@ -13,8 +13,10 @@ export default function Home() {
   const context = useContext(Context);
 
   useEffect(() => {
-    const socket = io("/find-my-mines");
-    context.setSocket(socket);
+    if(!context.socket) {
+      const socket = io("/find-my-mines");
+      context.setSocket(socket);
+    }
   }, []);
 
   const toHTW = () => {
