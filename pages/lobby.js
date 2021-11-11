@@ -66,7 +66,7 @@ export default function Lobby() {
               key={index}
               roomName={room.roomName}
               player={room.player.length}
-              onClickHnadler={joinRoom.bind(null, room)}
+              onClickHandler={joinRoom.bind(null, room)}
             />
           ))}
         </div>

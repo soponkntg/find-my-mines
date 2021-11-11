@@ -45,7 +45,10 @@ export const Chat = ({ message, username, socket, id }) => {
                         e.preventDefault();
                         socket.emit(
                             "new-message",
-                            { username: username, message: text },
+                            {
+                                username: username,
+                                message: text.replace(/noob|fuck|stfu|idiot|noobs|fucking|suck|fuckk|retard|fking|fcking|shut up|bitch|trash|fucking|ass|dick|dickhead|boobs|pussy|shit|fuking/gi, '****')
+                            },
                             id
                         );
                         setText("");
