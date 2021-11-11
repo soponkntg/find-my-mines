@@ -13,6 +13,7 @@ export function Music() {
     );
   }, []);
 
+
   const playingHandler = () => {
     if (playing) {
       audio.pause();
@@ -23,9 +24,36 @@ export function Music() {
     }
   };
 
+  const changeAudioHandler = () => {
+    const musicList = ["https://www.chosic.com/wp-content/uploads/2021/07/CHIPTUNE_The_Old_Tower_Inn.mp3",
+      'https://www.chosic.com/wp-content/uploads/2020/06/Komiku_-_04_-_Shopping_List.mp3',
+      'https://www.chosic.com/wp-content/uploads/2020/08/punch-deck-the-soul-crushing-monotony-of-isolation-instrumental-mix.mp3',
+      'https://www.chosic.com/wp-content/uploads/2021/04/Jalandhar.mp3',
+      'https://www.chosic.com/wp-content/uploads/2021/07/Japan-by-uniq.mp3',
+      'https://www.chosic.com/wp-content/uploads/2020/11/barradeen-bedtime-after-a-coffee.mp3',
+      'https://www.chosic.com/wp-content/uploads/2020/09/yoitrax-latte.mp3',
+      'https://www.chosic.com/wp-content/uploads/2020/07/punch-deck-brazilian-street-fight.mp3'];
+    let x = Math.floor(Math.random() * musicList.length);
+    if (audio.src != musicList[x]) {
+      audio.pause()
+      setPlaying(false)
+      console.log('change bg music')
+      setAudio(new Audio(musicList[x]))
+    } else {
+      changeAudioHandler()
+    }
+  }
+
+
+
   return (
-    <Button onClick={playingHandler}>
-      {playing ? "🔊 Music On" : "🔇 Music Off"}
-    </Button>
+    <>
+      <button onClick={playingHandler} style={{ fontSize: "3rem", backgroundColor: 'transparent', border: 'none' }}>
+        {playing ? "🔊" : "🔇"}
+      </button>
+      <Button onClick={changeAudioHandler} style={{ fontSize: "1.5rem", fontFamily: 'evil_empire', borderRadius: '30%' }}>
+        Random 🎵
+      </Button>
+    </>
   );
 }

@@ -71,12 +71,15 @@ export default function GamePLay() {
   return (
     <div className={styles.center}>
       {!game && (
-        <h1
-          className={styles.waiting}
-        >{`Hello ${context.username}, please wait for other player`}</h1>
+        <>
+          <h1
+            className={styles.waiting}
+          >{`Hello ${context.username}, please wait for other player`}</h1>
+        </>
       )}
       {game && (
         <>
+
           <div className={styles.title}>
             <div className={styles.player}>
               <div>{game.firstPlayer.win}</div>
@@ -133,6 +136,7 @@ export default function GamePLay() {
             socket={context.socket}
             id={game.id}
           />
+
           <div className={styles.bottomright}>
             <Music />
             <Button

@@ -6,6 +6,8 @@ import { Button } from "../components/Button";
 import { Modal } from "../components/Modal";
 import { Input } from "../components/Input";
 import { useRouter } from "next/router";
+import { Music } from "../components/Music";
+
 
 import Context from "../store";
 
@@ -48,44 +50,47 @@ export default function Lobby() {
     router.push("game-play");
   };
   return (
-    <div className={styles.center}>
-      <Logo />
-      <Button
-        onClickHandler={() => {
-          setModal(true);
-        }}
-      >
-        Create a room
-      </Button>
-      <div className={styles["room-container"]}>
-        {roomList.map((room, index) => (
-          <Room
-            key={index}
-            roomName={room.roomName}
-            player={room.player.length}
-            onClickHnadler={joinRoom.bind(null, room)}
-          />
-        ))}
-      </div>
+    <div>
 
-      <Modal
-        open={modal}
-        onClose={closeModal}
-        onConfirm={createRoom}
-        title="Create Room"
-      >
-        <div className={styles["room-name-input"]}>
-          <span>Room name</span>
-          <Input
-            type="text"
-            name="room_name"
-            val={roomName}
-            onChangeHandler={(e) => {
-              setRoomName(e.target.value);
-            }}
-          />
+      <div className={styles.center}>
+        <Logo />
+        <Button
+          onClickHandler={() => {
+            setModal(true);
+          }}
+        >
+          Create a room
+        </Button>
+        <div className={styles["room-container"]}>
+          {roomList.map((room, index) => (
+            <Room
+              key={index}
+              roomName={room.roomName}
+              player={room.player.length}
+              onClickHandler={joinRoom.bind(null, room)}
+            />
+          ))}
         </div>
-      </Modal>
+
+        <Modal
+          open={modal}
+          onClose={closeModal}
+          onConfirm={createRoom}
+          title="Create Room"
+        >
+          <div className={styles["room-name-input"]}>
+            <span>Room name</span>
+            <Input
+              type="text"
+              name="room_name"
+              val={roomName}
+              onChangeHandler={(e) => {
+                setRoomName(e.target.value);
+              }}
+            />
+          </div>
+        </Modal>
+      </div>
     </div>
   );
 }
