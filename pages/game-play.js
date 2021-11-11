@@ -50,7 +50,15 @@ export default function GamePLay() {
       alert("other play exited");
       window.open("/", "_self");
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    context.socket.on("trigger-reset-score", () => {
+      context.socket.emit("reset-score", game);
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [game]);
 
   const gridClickHandler = (index) => {
     context.socket.emit("click", game, index);

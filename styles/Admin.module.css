@@ -1,0 +1,29 @@
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 50px;
+}
+
+.center h1 {
+  font-size: 3rem;
+}
+
+.center h3 {
+  font-size: 6rem;
+}
+
+.room-container {
+  width: 800px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.auth {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100px;
+  justify-content: space-between;
+}

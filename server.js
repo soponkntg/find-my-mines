@@ -17,7 +17,7 @@ const handle = NextApp.getRequestHandler();
 const { instrument } = require("@socket.io/admin-ui");
 
 let roomList = [];
-
+let numOfPlayer = 0;
 let interval;
 
 const randomGrid = () => {
@@ -42,11 +42,11 @@ const randomGrid = () => {
 NextApp.prepare().then(() => {
   io.of("/find-my-mines").on("connection", (socket) => {
     console.log("player join server with id", socket.id);
-
+    numOfPlayer += 1;
     socket.on("lobby", () => {
       socket.emit("room-list", roomList);
     });
-
+    io.of("/find-my-mines").emit("admin-get-client", numOfPlayer);
     socket.on("create-room", (roomName, username) => {
       console.log(
         `${username} with id:${socket.id} create romm with name:${roomName}`
@@ -59,6 +59,7 @@ NextApp.prepare().then(() => {
         player: [{ id: socket.id, username: username }],
       });
       io.of("/find-my-mines").emit("room-list", roomList);
+      io.of("/find-my-mines").emit("admin", numOfPlayer, roomList);
     });
 
     socket.on("join-game", (roomId, username) => {
@@ -82,6 +83,7 @@ NextApp.prepare().then(() => {
         return room.id === roomId;
       })[0];
       io.of("/find-my-mines").emit("room-list", roomList);
+      io.of("/find-my-mines").emit("admin", numOfPlayer, roomList);
       setTimeout(() => {
         io.of("/find-my-mines")
           .to(roomId)
@@ -177,12 +179,17 @@ NextApp.prepare().then(() => {
       io.of("/find-my-mines").to(game.id).emit("both-player-ready", game);
     });
 
+    socket.on("reset-score-from-server", (roomid) => {
+      io.of("/find-my-mines").to(roomid).emit("trigger-reset-score");
+    });
+
     socket.on("new-message", (message, id) => {
       io.of("/find-my-mines").to(id).emit("message-from-server", message);
     });
 
     socket.on("disconnect", () => {
       console.log("dis");
+      numOfPlayer -= 1;
       const index = roomList.findIndex((room) => {
         for (let x of room.player) {
           if (x.id === socket.id) {
@@ -196,6 +203,7 @@ NextApp.prepare().then(() => {
         io.of("/find-my-mines").to(roomID).emit("other-player exit");
       }
       io.of("/find-my-mines").emit("room-list", roomList);
+      io.of("/find-my-mines").emit("admin", numOfPlayer, roomList);
     });
   });
 

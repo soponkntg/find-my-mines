@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Room } from "../components/Room";
 import { Logo } from "../components/Logo";
-import styles from "../styles/lobby.module.css";
+import styles from "../styles/Lobby.module.css";
 import { Button } from "../components/Button";
 import { Modal } from "../components/Modal";
 import { Input } from "../components/Input";
@@ -26,6 +26,7 @@ export default function Lobby() {
     context.socket.on("room-list", (roomlst) => {
       setRoomList(roomlst);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const closeModal = () => {
