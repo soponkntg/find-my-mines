@@ -147,6 +147,7 @@ NextApp.prepare().then(() => {
     });
 
     socket.on("new-game", (game) => {
+      clearInterval(interval);
       console.log("new game");
       game.firstPlayer.score = 0;
       game.secondPlayer.score = 0;

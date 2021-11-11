@@ -53,13 +53,12 @@ export default function GamePLay() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
+  if(context.socket) {
     context.socket.on("trigger-reset-score", () => {
-      console.log(game);
-      context.socket.emit("reset-score", game);
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [game]);
+    console.log(game);
+    context.socket.emit("reset-score", game);
+  });
+  }
 
   const gridClickHandler = (index) => {
     context.socket.emit("click", game, index);
