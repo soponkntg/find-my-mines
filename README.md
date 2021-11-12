@@ -1,11 +1,10 @@
-# Find My Mines -- developed by group 16 
+![logo img](public/logo_red.png)
+# Find My Mines
 
-## If you only want to play
+## Getting start
+available: https://find-my-mines.herokuapp.com/
 
-
-open https://find-my-mines.herokuapp.com/ with your browser
-
-game interface should be like this
+![home img](public/home.png)
 
 ## For Admin
 
