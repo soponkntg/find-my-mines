@@ -8,6 +8,9 @@ available: https://find-my-mines.herokuapp.com/
 ![home img](public/home.png)
 
 - all instructions are available at how-to-play page
+- Implement using NextJS with custom server for the purpose of routing and host both client and server within this repo
+- front-end: React with css module
+- back-end: nodeJS with Socket.io
 
 ## For Admin
 
