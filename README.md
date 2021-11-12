@@ -1,5 +1,21 @@
-## Getting Started
+# Find My Mines -- developed by group 16 
 
+## If you only want to play
+
+
+open https://find-my-mines.herokuapp.com/ with your browser
+
+game interface should be like this
+
+## For Admin
+
+open https://admin.socket.io/
+
+username: admin
+
+password: admin 
+
+## For development
 Clone the project:
 
 ```bash
