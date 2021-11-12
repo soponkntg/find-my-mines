@@ -1,18 +1,34 @@
-![logo img](public/logo_red.png)
 # Find My Mines
+![logo img](public/logo_red.png)
+
 
 ## Getting start
 available: https://find-my-mines.herokuapp.com/
 
 ![home img](public/home.png)
 
+- all instructions are available at how-to-play page
+
 ## For Admin
 
-open https://admin.socket.io/
+available: https://find-my-mines.herokuapp.com/admin
 
-username: admin
+available: https://admin.socket.io/ (url: https://find-my-mines.herokuapp.com/admin)
 
-password: admin 
+**Credential**
+
+-username: admin
+
+-password: admin 
+
+## Developed by Group16
+- Sopon Kongnithigarn 6238228621
+- Chotipat Chaiyarat 6238046721
+- Wirit Khongcharoen 6238200021
+- Krittin Punpermcharoenkit 6238008921
+- Yongyutha Kunapinun 6031835521
+
+(for the purpose of Netcentric course)
 
 ## For development
 Clone the project:
